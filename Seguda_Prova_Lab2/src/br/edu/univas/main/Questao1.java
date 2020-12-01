@@ -21,11 +21,13 @@ public class Questao1 {
 		if (option == 1) {
 			
 			cadastro (conta, contaVar);
-			System.out.println(conta[0].descricao);
-			System.out.println(conta[0].valor);
-			System.out.println(conta[0].dataVenc);
-			System.out.println(conta[0].tipo);
+			
 		
+		}else if (option == 2) {
+			
+			float saldo = verSaldo(conta);
+			System.out.println("O saldo da conta é: " + saldo);
+			
 		}
 		
 		else if (option == 3) {
@@ -50,7 +52,7 @@ public class Questao1 {
 	public static void cadastro (Conta [] conta, Conta contaVar) {
 		
 		for (int i = 0; i < rangeArray; i++) {
-			
+			contaVar = new Conta();
 			if (conta[i] == null) {
 				
 				System.out.println("Digite a DESCRIÇÃO da conta à ser cadastrada:");
@@ -79,13 +81,38 @@ public class Questao1 {
 					
 				}while (true);
 				
-				
+				conta[i] = contaVar;
+				break;
 			}
 			
-			conta[i] = contaVar;
-			break;
+			
+			
 		}
 		
 	}
-	
+	public static float verSaldo (Conta [] conta) {
+		
+		float despesa = 0f;
+		float receita = 0f;
+		
+		
+		
+			for (int i = 0; i < rangeArray; i++) {
+			
+			if (conta[i] != null && conta[i].tipo.equals("Despesa")) {
+				
+				despesa = despesa + conta[i].valor;
+				
+			}else if (conta [i] != null && conta[i].tipo.equals("Receita")) {
+				
+				receita = receita + conta[i].valor;
+				
+			}
+		
+		
+		}
+		
+		float saldo = receita - despesa;
+		return saldo;
+	}
 }
